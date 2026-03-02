@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛡️ SafeChat - Hackathon Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <h1>🛡️ SafeChat</h1>
+                <p>Demo Chat with Real-time Safety Detection</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-primary" onclick="setupDemoUsers()">Setup Demo</button>
+                <button class="btn btn-secondary" onclick="openStats()">Stats</button>
+                <button class="btn btn-secondary" onclick="showTestMessages()">Test Messages</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <h3>👥 Users</h3>
+                <div class="users-container">
+                    <div id="usersList"></div>
+                    <button class="btn btn-small" onclick="addNewUser()">+ New User</button>
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <div class="chat-section">
+                <!-- Chat Header -->
+                <div class="chat-header">
+                    <div id="chatHeaderContent">Select a user to start</div>
+                </div>
+
+                <!-- Messages -->
+                <div id="messagesArea" class="messages-area">
+                    <div style="color: #999; text-align: center; padding: 40px;">
+                        Select a user to begin chatting
+                    </div>
+                </div>
+
+                <!-- Message Input -->
+                <div class="message-input-wrapper">
+                    <input 
+                        type="text" 
+                        id="messageInput" 
+                        class="message-input"
+                        placeholder="Type a message..."
+                        disabled
+                    >
+                    <button class="btn btn-primary" id="sendBtn" disabled onclick="sendMessage()">
+                        Send
+                    </button>
+                </div>
+            </div>
+
+            <!-- Analysis Panel -->
+            <div class="analysis-panel">
+                <div class="panel-header">
+                    <h3>📊 Safety Analysis</h3>
+                </div>
+                <div id="analysisContent" class="analysis-content">
+                    <p>Message analysis will appear here</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    
+    <!-- Test Messages Modal -->
+    <div id="testModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📋 Test Messages</h2>
+                <button class="close-btn" onclick="closeModal('testModal')">×</button>
+            </div>
+            <div class="modal-body" id="testMessagesContainer"></div>
+        </div>
+    </div>
+
+    <!-- Warning Modal -->
+    <div id="warningModal" class="modal">
+        <div class="modal-content warning">
+            <div class="modal-header">
+                <h2>⚠️ Message Warning</h2>
+            </div>
+            <div class="modal-body" id="warningContent"></div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="cancelMessage()">Cancel</button>
+                <button class="btn btn-primary" onclick="confirmMessage()">Send Anyway</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Block Modal -->
+    <div id="blockModal" class="modal">
+        <div class="modal-content danger">
+            <div class="modal-header">
+                <h2>🚫 User Blocked</h2>
+            </div>
+            <div class="modal-body" id="blockContent"></div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal('blockModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Modal -->
+    <div id="statsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📈 System Statistics</h2>
+                <button class="close-btn" onclick="closeModal('statsModal')">×</button>
+            </div>
+            <div class="modal-body" id="statsContent">Loading...</div>
+        </div>
+    </div>
+
+    <!-- New User Modal -->
+    <div id="newUserModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>➕ Create New User</h2>
+                <button class="close-btn" onclick="closeModal('newUserModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="newUsername" placeholder="Username" class="input-field">
+                <label>
+                    <input type="number" id="newFollowers" placeholder="Followers" value="0" class="input-field">
+                </label>
+                <label>
+                    <input type="number" id="newPosts" placeholder="Posts" value="0" class="input-field">
+                </label>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('newUserModal')">Cancel</button>
+                <button class="btn btn-primary" onclick="createNewUser()">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
